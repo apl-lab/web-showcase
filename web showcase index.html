@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Before & After Web Redesign Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #0a0a0a;
+  --gray-900: #111111;
+  --gray-700: #2a2a2a;
+  --gray-400: #888888;
+  --gray-200: #d4d4d4;
+  --gray-100: #ebebeb;
+  --gray-50: #f7f7f7;
+  --white: #ffffff;
+  --radius: 4px;
+  --radius-lg: 8px;
+}
+
+html, body {
+  min-height: 100%;
+  background: var(--white);
+  color: var(--black);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+}
+
+/* ── Header ── */
+.header {
+  padding: 24px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.wordmark {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.wordmark-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 18px;
+  color: var(--black);
+  letter-spacing: -0.01em;
+}
+.wordmark-tag {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+}
+
+.mode-pills {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.pill {
+  padding: 7px 18px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  border: none;
+  border-right: 1px solid var(--gray-200);
+  background: var(--white);
+  color: var(--gray-400);
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.pill:last-child { border-right: none; }
+.pill.active {
+  background: var(--black);
+  color: var(--white);
+}
+.pill:hover:not(.active) {
+  background: var(--gray-50);
+  color: var(--black);
+}
+
+/* ── Upload section ── */
+.upload-section {
+  padding: 32px 40px 0;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.field-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 6px;
+  display: block;
+}
+
+.text-input {
+  width: 100%;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--black);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  background: var(--white);
+  transition: border-color 0.15s;
+  margin-bottom: 20px;
+}
+.text-input:focus { outline: none; border-color: var(--black); }
+.text-input::placeholder { color: var(--gray-200); }
+
+.project-input {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 15px;
+}
+
+.label-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.label-row .text-input { margin-bottom: 0; }
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.upload-card {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 36px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+  background: var(--gray-50);
+}
+.upload-card:hover, .upload-card.drag-over {
+  border-color: var(--black);
+  background: var(--white);
+}
+.upload-card.has-image {
+  padding: 0;
+  overflow: hidden;
+  background: var(--white);
+  border-color: var(--gray-200);
+}
+.upload-card input[type=file] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+.upload-step {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  margin-bottom: 10px;
+}
+.upload-icon {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: var(--gray-200);
+}
+.upload-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 15px;
+  color: var(--black);
+  margin-bottom: 5px;
+}
+.upload-hint {
+  font-size: 11px;
+  color: var(--gray-400);
+}
+.upload-thumb {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+.upload-thumb-label {
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--gray-400);
+  border-top: 1px solid var(--gray-100);
+}
+.replace-btn {
+  font-size: 10px;
+  color: var(--gray-400);
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+}
+.replace-btn:hover { color: var(--black); }
+
+.ready-note {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: var(--radius);
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+
+/* ── Stage ── */
+.stage-wrapper {
+  padding: 32px 40px;
+  max-width: 960px;
+  margin: 0 auto;
+  display: none;
+}
+.stage-wrapper.visible { display: block; }
+
+.stage-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  gap: 16px;
+}
+.stage-project {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 18px;
+  color: var(--black);
+  font-style: italic;
+}
+.stage-sub {
+  font-size: 11px;
+  color: var(--gray-400);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* Slider */
+.compare-slider {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  user-select: none;
+  cursor: ew-resize;
+  background: var(--gray-50);
+  line-height: 0;
+}
+.compare-slider img {
+  display: block;
+  width: 100%;
+  max-height: 74vh;
+  object-fit: cover;
+  object-position: top;
+}
+.after-wrap {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  overflow: hidden;
+}
+.after-wrap img {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  max-height: none;
+}
+
+.handle-line {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--black);
+  pointer-events: none;
+}
+.handle-circle {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white);
+  font-size: 14px;
+  pointer-events: none;
+  border: 2px solid var(--white);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.18);
+}
+
+.chip {
+  position: absolute;
+  top: 12px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.chip-before {
+  left: 12px;
+  background: rgba(255,255,255,0.92);
+  color: var(--gray-700);
+  border: 1px solid var(--gray-200);
+}
+.chip-after {
+  right: 12px;
+  background: var(--black);
+  color: var(--white);
+}
+
+/* Overlay */
+.compare-overlay {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  line-height: 0;
+  display: none;
+}
+.compare-overlay img {
+  display: block;
+  width: 100%;
+  max-height: 74vh;
+  object-fit: cover;
+  object-position: top;
+}
+.compare-overlay .img-top {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Side by side */
+.compare-sbs {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.sbs-panel {}
+.sbs-chip {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+  margin-bottom: 8px;
+}
+.sbs-chip-before {
+  background: var(--gray-100);
+  color: var(--gray-700);
+}
+.sbs-chip-after {
+  background: var(--black);
+  color: var(--white);
+}
+.sbs-panel img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-200);
+  display: block;
+  max-height: 74vh;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Controls */
+.controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.ctrl-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+.ctrl-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  white-space: nowrap;
+}
+.ctrl-range {
+  flex: 1;
+  -webkit-appearance: none;
+  height: 1px;
+  background: var(--gray-200);
+  outline: none;
+  cursor: pointer;
+}
+.ctrl-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--black);
+  cursor: pointer;
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 1px var(--gray-200);
+}
+.ctrl-val {
+  font-size: 11px;
+  color: var(--gray-400);
+  min-width: 32px;
+  text-align: right;
+}
+
+.share-btn {
+  padding: 7px 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  color: var(--gray-700);
+  font-size: 11px;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.share-btn:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--gray-100);
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--gray-200);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  gap: 6px;
+}
+.footer strong { color: var(--gray-400); font-weight: 400; }
+
+@media print {
+  .upload-section, .mode-pills, .controls-bar, .footer, .header { display: none !important; }
+  .stage-wrapper { padding: 0 !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wordmark">
+    <span class="wordmark-title">Before & After</span>
+    <span class="wordmark-tag">Web Redesign Showcase</span>
+  </div>
+  <div class="mode-pills">
+    <button class="pill active" onclick="setMode('slider')">Slider</button>
+    <button class="pill" onclick="setMode('overlay')">Overlay</button>
+    <button class="pill" onclick="setMode('sbs')">Side by Side</button>
+  </div>
+</header>
+
+<section class="upload-section">
+
+  <label class="field-label" for="project-name">Project / client name</label>
+  <input class="text-input project-input" id="project-name" type="text" placeholder="e.g. Smith for Senate — Website Redesign" />
+
+  <div class="label-row">
+    <div>
+      <label class="field-label" for="label-before">Before label</label>
+      <input class="text-input" id="label-before" type="text" placeholder="Old Website" value="Old Website" />
+    </div>
+    <div>
+      <label class="field-label" for="label-after">After label</label>
+      <input class="text-input" id="label-after" type="text" placeholder="New Website" value="New Website" />
+    </div>
+  </div>
+
+  <div class="upload-grid">
+    <div class="upload-card" id="card-before" ondragover="handleDragOver(event,'before')" ondragleave="handleDragLeave(event,'before')" ondrop="handleDrop(event,'before')">
+      <input type="file" accept="image/*" onchange="handleFile(event,'before')" id="input-before" />
+      <div id="upload-ui-before">
+        <div class="upload-icon">↑</div>
+        <div class="upload-step">Step 1</div>
+        <div class="upload-title">Before screenshot</div>
+        <div class="upload-hint">Drop PNG here or click to browse</div>
+      </div>
+      <div id="thumb-before" style="display:none">
+        <img class="upload-thumb" id="thumb-img-before" />
+        <div class="upload-thumb-label">
+          <span id="thumb-label-before">Old Website</span>
+          <button class="replace-btn" onclick="replaceImg(event,'before')">Replace</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="upload-card" id="card-after" ondragover="handleDragOver(event,'after')" ondragleave="handleDragLeave(event,'after')" ondrop="handleDrop(event,'after')">
+      <input type="file" accept="image/*" onchange="handleFile(event,'after')" id="input-after" />
+      <div id="upload-ui-after">
+        <div class="upload-icon">↑</div>
+        <div class="upload-step">Step 2</div>
+        <div class="upload-title">After screenshot</div>
+        <div class="upload-hint">Drop PNG here or click to browse</div>
+      </div>
+      <div id="thumb-after" style="display:none">
+        <img class="upload-thumb" id="thumb-img-after" />
+        <div class="upload-thumb-label">
+          <span id="thumb-label-after">New Website</span>
+          <button class="replace-btn" onclick="replaceImg(event,'after')">Replace</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ready-note" id="ready-note">
+    Both images loaded — scroll down to see the comparison
+  </div>
+
+</section>
+
+<section class="stage-wrapper" id="stage-wrapper">
+
+  <div class="stage-meta">
+    <div class="stage-project" id="stage-project-name">Client Preview</div>
+    <div class="stage-sub" id="stage-sub"></div>
+  </div>
+
+  <div class="compare-slider" id="compare-slider">
+    <img id="img-before-slider" src="" alt="Before" />
+    <div class="after-wrap" id="after-wrap">
+      <img id="img-after-slider" src="" alt="After" />
+    </div>
+    <div class="handle-line" id="handle-line"></div>
+    <div class="handle-circle" id="handle-circle">⇔</div>
+    <div class="chip chip-before" id="chip-before">Old Website</div>
+    <div class="chip chip-after" id="chip-after">New Website</div>
+  </div>
+
+  <div class="compare-overlay" id="compare-overlay">
+    <img id="img-base-overlay" src="" alt="Before" />
+    <img class="img-top" id="img-top-overlay" src="" alt="After" />
+  </div>
+
+  <div class="compare-sbs" id="compare-sbs">
+    <div class="sbs-panel">
+      <div class="sbs-chip sbs-chip-before" id="sbs-chip-before">Old Website</div>
+      <img id="img-sbs-before" src="" alt="Before" />
+    </div>
+    <div class="sbs-panel">
+      <div class="sbs-chip sbs-chip-after" id="sbs-chip-after">New Website</div>
+      <img id="img-sbs-after" src="" alt="After" />
+    </div>
+  </div>
+
+  <div class="controls-bar">
+    <div class="ctrl-group" id="slider-ctrl">
+      <span class="ctrl-label">Position</span>
+      <input class="ctrl-range" type="range" min="2" max="98" value="50" step="1" id="split-range" />
+      <span class="ctrl-val" id="split-val">50%</span>
+    </div>
+    <div class="ctrl-group" id="overlay-ctrl" style="display:none">
+      <span class="ctrl-label">Opacity</span>
+      <input class="ctrl-range" type="range" min="0" max="100" value="100" step="1" id="opacity-range" />
+      <span class="ctrl-val" id="opacity-val">100%</span>
+    </div>
+    <button class="share-btn" onclick="window.print()">Print / Share PDF</button>
+  </div>
+
+</section>
+
+<footer class="footer">
+  Created by <strong>Andrew Loposser</strong>
+</footer>
+
+<script>
+let imgBefore = null, imgAfter = null;
+let dragging = false;
+let currentMode = 'slider';
+
+function handleFile(e, which) {
+  const file = e.target.files[0];
+  if (file) loadImage(file, which);
+}
+function handleDragOver(e, which) {
+  e.preventDefault();
+  document.getElementById('card-' + which).classList.add('drag-over');
+}
+function handleDragLeave(e, which) {
+  document.getElementById('card-' + which).classList.remove('drag-over');
+}
+function handleDrop(e, which) {
+  e.preventDefault();
+  document.getElementById('card-' + which).classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) loadImage(file, which);
+}
+function replaceImg(e, which) {
+  e.stopPropagation();
+  document.getElementById('input-' + which).click();
+}
+
+function loadImage(file, which) {
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    const src = ev.target.result;
+    if (which === 'before') imgBefore = src;
+    else imgAfter = src;
+
+    document.getElementById('upload-ui-' + which).style.display = 'none';
+    document.getElementById('thumb-' + which).style.display = 'block';
+    document.getElementById('thumb-img-' + which).src = src;
+    document.getElementById('card-' + which).classList.add('has-image');
+
+    if (imgBefore && imgAfter) {
+      document.getElementById('ready-note').style.display = 'flex';
+      buildComparison();
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function buildComparison() {
+  const projectName = document.getElementById('project-name').value || 'Client Preview';
+  const lBefore = document.getElementById('label-before').value || 'Old Website';
+  const lAfter = document.getElementById('label-after').value || 'New Website';
+
+  document.getElementById('stage-project-name').textContent = projectName;
+  document.getElementById('stage-sub').textContent = lBefore + ' → ' + lAfter;
+
+  ['img-before-slider','img-base-overlay','img-sbs-before'].forEach(id => {
+    document.getElementById(id).src = imgBefore;
+  });
+  ['img-after-slider','img-top-overlay','img-sbs-after'].forEach(id => {
+    document.getElementById(id).src = imgAfter;
+  });
+
+  document.getElementById('chip-before').textContent = lBefore;
+  document.getElementById('chip-after').textContent = lAfter;
+  document.getElementById('sbs-chip-before').textContent = lBefore;
+  document.getElementById('sbs-chip-after').textContent = lAfter;
+  document.getElementById('thumb-label-before').textContent = lBefore;
+  document.getElementById('thumb-label-after').textContent = lAfter;
+
+  document.getElementById('stage-wrapper').classList.add('visible');
+  setMode(currentMode);
+
+  setTimeout(() => {
+    document.getElementById('stage-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 150);
+}
+
+function setSplit(pct) {
+  const wrap = document.getElementById('after-wrap');
+  const line = document.getElementById('handle-line');
+  const circle = document.getElementById('handle-circle');
+  const sliderEl = document.getElementById('compare-slider');
+  const afterImg = document.getElementById('img-after-slider');
+  wrap.style.width = pct + '%';
+  afterImg.style.width = sliderEl.offsetWidth + 'px';
+  line.style.left = 'calc(' + pct + '% - 1px)';
+  circle.style.left = pct + '%';
+  document.getElementById('split-range').value = pct;
+  document.getElementById('split-val').textContent = Math.round(pct) + '%';
+}
+
+const sliderEl = document.getElementById('compare-slider');
+sliderEl.addEventListener('mousedown', e => {
+  if (!imgBefore || !imgAfter || currentMode !== 'slider') return;
+  dragging = true; moveSplit(e);
+});
+document.addEventListener('mousemove', e => { if (dragging) moveSplit(e); });
+document.addEventListener('mouseup', () => { dragging = false; });
+sliderEl.addEventListener('touchstart', e => {
+  if (!imgBefore || !imgAfter || currentMode !== 'slider') return;
+  dragging = true; moveSplitTouch(e);
+}, {passive:true});
+document.addEventListener('touchmove', e => { if (dragging) moveSplitTouch(e); }, {passive:true});
+document.addEventListener('touchend', () => { dragging = false; });
+
+function moveSplit(e) {
+  const rect = sliderEl.getBoundingClientRect();
+  const pct = Math.max(2, Math.min(98, (e.clientX - rect.left) / rect.width * 100));
+  setSplit(pct);
+}
+function moveSplitTouch(e) {
+  const rect = sliderEl.getBoundingClientRect();
+  const pct = Math.max(2, Math.min(98, (e.touches[0].clientX - rect.left) / rect.width * 100));
+  setSplit(pct);
+}
+
+document.getElementById('split-range').addEventListener('input', function() {
+  setSplit(parseFloat(this.value));
+});
+document.getElementById('opacity-range').addEventListener('input', function() {
+  const v = parseFloat(this.value);
+  document.getElementById('img-top-overlay').style.opacity = v / 100;
+  document.getElementById('opacity-val').textContent = Math.round(v) + '%';
+});
+
+function setMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('.pill').forEach((p,i) => {
+    p.classList.toggle('active', ['slider','overlay','sbs'][i] === mode);
+  });
+  document.getElementById('compare-slider').style.display = mode === 'slider' ? 'block' : 'none';
+  document.getElementById('compare-overlay').style.display = mode === 'overlay' ? 'block' : 'none';
+  document.getElementById('compare-sbs').style.display = mode === 'sbs' ? 'grid' : 'none';
+  document.getElementById('slider-ctrl').style.display = mode === 'slider' ? 'flex' : 'none';
+  document.getElementById('overlay-ctrl').style.display = mode === 'overlay' ? 'flex' : 'none';
+  if (mode === 'slider' && imgBefore && imgAfter) setTimeout(() => setSplit(50), 50);
+}
+
+window.addEventListener('resize', () => {
+  if (currentMode === 'slider' && imgBefore && imgAfter) {
+    setSplit(parseFloat(document.getElementById('split-range').value));
+  }
+});
+</script>
+</body>
+</html>
